@@ -23,7 +23,7 @@ import com.github.fenixsoft.bookstore.domain.account.Account;
 import com.github.fenixsoft.bookstore.domain.account.validation.AuthenticatedAccount;
 import com.github.fenixsoft.bookstore.domain.account.validation.NotConflictAccount;
 import com.github.fenixsoft.bookstore.domain.account.validation.UniqueAccount;
-import com.github.fenixsoft.bookstore.infrastructure.jaxrs.CommonResponse;
+import com.github.fenixsoft.bookstore.infrastructure.jaxrs.AbstractCommonResponse;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -69,7 +69,7 @@ public class AccountResource {
     @POST
     @CacheEvict(key = "#user.username")
     public Response createUser(@Valid @UniqueAccount Account user) {
-        return CommonResponse.op(() -> service.createAccount(user));
+        return AbstractCommonResponse.op(() -> service.createAccount(user));
     }
 
     /**
@@ -78,6 +78,6 @@ public class AccountResource {
     @PUT
     @CacheEvict(key = "#user.username")
     public Response updateUser(@Valid @AuthenticatedAccount @NotConflictAccount Account user) {
-        return CommonResponse.op(() -> service.updateAccount(user));
+        return AbstractCommonResponse.op(() -> service.updateAccount(user));
     }
 }

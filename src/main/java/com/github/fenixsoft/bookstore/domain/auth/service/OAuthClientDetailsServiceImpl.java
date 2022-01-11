@@ -41,7 +41,7 @@ import javax.inject.Named;
  * @date 2020/3/7 19:45
  **/
 @Named
-public class OAuthClientDetailsService implements ClientDetailsService {
+public class OAuthClientDetailsServiceImpl implements ClientDetailsService {
 
     /**
      * 客户端ID

@@ -32,6 +32,7 @@ public class CacheConfiguration {
         return manager;
     }
 
+    @SuppressWarnings("AlibabaLowerCamelCaseVariableNaming")
     @Bean(name = "settlement")
     public Cache getSettlementTTLCache() {
         return new CaffeineCache("settlement", Caffeine.newBuilder().expireAfterAccess(SYSTEM_DEFAULT_EXPIRES, TimeUnit.MILLISECONDS).build());

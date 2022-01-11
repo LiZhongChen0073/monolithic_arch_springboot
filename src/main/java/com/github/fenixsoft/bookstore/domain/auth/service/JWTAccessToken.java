@@ -76,7 +76,7 @@ public class JWTAccessToken extends JwtAccessTokenConverter {
     public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
         Authentication user = authentication.getUserAuthentication();
         String[] authorities = user.getAuthorities().stream().map(GrantedAuthority::getAuthority).toArray(String[]::new);
-        Map<String, Object> payLoad = new HashMap<>();
+        Map<String, Object> payLoad = new HashMap<>(16);
         // Spring Security OAuth的JWT令牌默认实现中就加入了一个“user_name”的项存储了当前用户名
         // 这里主要是出于演示Payload的用途，以及方便客户端获取（否则客户端要从令牌中解码Base64来获取），设置了一个“username”，两者的内容是一致的
         payLoad.put("username", user.getName());

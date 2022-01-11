@@ -20,11 +20,9 @@ package com.github.fenixsoft.bookstore.resource;
 
 import com.github.fenixsoft.bookstore.applicaiton.payment.PaymentApplicationService;
 import com.github.fenixsoft.bookstore.domain.account.Account;
-import com.github.fenixsoft.bookstore.domain.auth.AuthenticAccount;
 import com.github.fenixsoft.bookstore.domain.auth.Role;
 import com.github.fenixsoft.bookstore.domain.payment.Payment;
-import com.github.fenixsoft.bookstore.domain.payment.Stockpile;
-import com.github.fenixsoft.bookstore.infrastructure.jaxrs.CommonResponse;
+import com.github.fenixsoft.bookstore.infrastructure.jaxrs.AbstractCommonResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -68,9 +66,9 @@ public class PaymentResource {
     @Path("/modify/{payId}")
     public Response updatePaymentStateAlias(@PathParam("payId") String payId, @QueryParam("accountId") Integer accountId, @QueryParam("state") Payment.State state) {
         if (state == Payment.State.PAYED) {
-            return CommonResponse.op(() -> service.accomplishPayment(accountId, payId));
+            return AbstractCommonResponse.op(() -> service.accomplishPayment(accountId, payId));
         } else {
-            return CommonResponse.op(() -> service.cancelPayment(payId));
+            return AbstractCommonResponse.op(() -> service.cancelPayment(payId));
         }
     }
 

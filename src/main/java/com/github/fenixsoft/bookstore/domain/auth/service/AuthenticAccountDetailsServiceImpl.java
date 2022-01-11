@@ -25,7 +25,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.Optional;
 
 /**
  * 认证用户信息查询服务
@@ -33,7 +32,7 @@ import java.util.Optional;
  * {@link UserDetailsService}接口定义了从外部（数据库、LDAP，任何地方）根据用户名查询到
  */
 @Named
-public class AuthenticAccountDetailsService implements UserDetailsService {
+public class AuthenticAccountDetailsServiceImpl implements UserDetailsService {
 
     @Inject
     private AuthenticAccountRepository accountRepository;

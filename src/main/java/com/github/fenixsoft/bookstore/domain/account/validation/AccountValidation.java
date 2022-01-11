@@ -56,16 +56,19 @@ public class AccountValidation<T extends Annotation> implements ConstraintValida
     }
 
     public static class ExistsAccountValidator extends AccountValidation<ExistsAccount> {
+        @Override
         public void initialize(ExistsAccount constraintAnnotation) {
             predicate = c -> repository.existsById(c.getId());
         }
     }
 
     public static class AuthenticatedAccountValidator extends AccountValidation<AuthenticatedAccount> {
+        @Override
         public void initialize(AuthenticatedAccount constraintAnnotation) {
+            String anonymousUser = "anonymousUser";
             predicate = c -> {
                 Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-                if ("anonymousUser".equals(principal)) {
+                if (anonymousUser.equals(principal)) {
                     return false;
                 } else {
                     AuthenticAccount loginUser = (AuthenticAccount) principal;
@@ -76,12 +79,14 @@ public class AccountValidation<T extends Annotation> implements ConstraintValida
     }
 
     public static class UniqueAccountValidator extends AccountValidation<UniqueAccount> {
+        @Override
         public void initialize(UniqueAccount constraintAnnotation) {
             predicate = c -> !repository.existsByUsernameOrEmailOrTelephone(c.getUsername(), c.getEmail(), c.getTelephone());
         }
     }
 
     public static class NotConflictAccountValidator extends AccountValidation<NotConflictAccount> {
+        @Override
         public void initialize(NotConflictAccount constraintAnnotation) {
             predicate = c -> {
                 Collection<Account> collection = repository.findByUsernameOrEmailOrTelephone(c.getUsername(), c.getEmail(), c.getTelephone());

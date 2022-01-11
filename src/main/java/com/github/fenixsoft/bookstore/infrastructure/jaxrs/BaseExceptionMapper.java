@@ -39,6 +39,6 @@ public class BaseExceptionMapper implements ExceptionMapper<Throwable> {
     @Override
     public Response toResponse(Throwable exception) {
         log.error(exception.getMessage(), exception);
-        return CommonResponse.failure(exception.getMessage());
+        return AbstractCommonResponse.failure(exception.getMessage());
     }
 }

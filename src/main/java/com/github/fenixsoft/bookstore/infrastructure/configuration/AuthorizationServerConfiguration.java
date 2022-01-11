@@ -18,9 +18,9 @@
 
 package com.github.fenixsoft.bookstore.infrastructure.configuration;
 
-import com.github.fenixsoft.bookstore.domain.auth.service.AuthenticAccountDetailsService;
+import com.github.fenixsoft.bookstore.domain.auth.service.AuthenticAccountDetailsServiceImpl;
 import com.github.fenixsoft.bookstore.domain.auth.service.JWTAccessTokenService;
-import com.github.fenixsoft.bookstore.domain.auth.service.OAuthClientDetailsService;
+import com.github.fenixsoft.bookstore.domain.auth.service.OAuthClientDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -54,7 +54,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * OAuth2客户端信息服务
      */
     @Autowired
-    private OAuthClientDetailsService clientService;
+    private OAuthClientDetailsServiceImpl clientService;
 
     /**
      * 认证服务管理器
@@ -69,7 +69,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * 用户信息服务
      */
     @Autowired
-    private AuthenticAccountDetailsService accountService;
+    private AuthenticAccountDetailsServiceImpl accountService;
 
 
     /**

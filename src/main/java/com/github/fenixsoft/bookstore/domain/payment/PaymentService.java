@@ -132,6 +132,7 @@ public class PaymentService {
      */
     public void setupAutoThawedTrigger(Payment payment) {
         timer.schedule(new TimerTask() {
+            @Override
             public void run() {
                 synchronized (payment.getPayId().intern()) {
                     // 使用2分钟之前的Payment到数据库中查出当前的Payment

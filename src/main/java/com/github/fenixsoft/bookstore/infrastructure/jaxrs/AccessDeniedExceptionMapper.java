@@ -27,6 +27,6 @@ public class AccessDeniedExceptionMapper implements ExceptionMapper<AccessDenied
     @Override
     public Response toResponse(AccessDeniedException exception) {
         log.warn("越权访问被禁止 {}: {}", request.getMethod(), request.getPathInfo());
-        return CommonResponse.send(Response.Status.FORBIDDEN, exception.getMessage());
+        return AbstractCommonResponse.send(Response.Status.FORBIDDEN, exception.getMessage());
     }
 }

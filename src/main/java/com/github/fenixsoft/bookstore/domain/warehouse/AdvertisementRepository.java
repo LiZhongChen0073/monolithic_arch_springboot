@@ -28,5 +28,6 @@ import org.springframework.data.repository.CrudRepository;
  * @date 2020/3/7 10:51
  **/
 public interface AdvertisementRepository extends CrudRepository<Advertisement, Integer> {
+    @Override
     Iterable<Advertisement> findAll() throws DataAccessException;
 }

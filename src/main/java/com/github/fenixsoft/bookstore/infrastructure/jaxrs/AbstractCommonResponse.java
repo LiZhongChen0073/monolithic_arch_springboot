@@ -38,9 +38,9 @@ import java.util.function.Consumer;
  * @author icyfenix@gmail.com
  * @date 2020/3/6 15:46
  **/
-public abstract class CommonResponse {
+public abstract class AbstractCommonResponse {
 
-    private static final Logger log = LoggerFactory.getLogger(CommonResponse.class);
+    private static final Logger log = LoggerFactory.getLogger(AbstractCommonResponse.class);
 
     /**
      * 向客户端发送自定义操作信息
@@ -86,10 +86,10 @@ public abstract class CommonResponse {
     public static Response op(Runnable executor, Consumer<Exception> exceptionConsumer) {
         try {
             executor.run();
-            return CommonResponse.success();
+            return AbstractCommonResponse.success();
         } catch (Exception e) {
             exceptionConsumer.accept(e);
-            return CommonResponse.failure(e.getMessage());
+            return AbstractCommonResponse.failure(e.getMessage());
         }
     }
 

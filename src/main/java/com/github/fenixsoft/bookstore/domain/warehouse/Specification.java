@@ -24,6 +24,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 
 /**
  * 商品规格
@@ -66,5 +67,33 @@ public class Specification extends BaseEntity {
 
     public void setProductId(Integer productId) {
         this.productId = productId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Specification that = (Specification) o;
+
+        if (!Objects.equals(item, that.item)) {
+            return false;
+        }
+        if (!Objects.equals(value, that.value)) {
+            return false;
+        }
+        return Objects.equals(productId, that.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = item != null ? item.hashCode() : 0;
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        result = 31 * result + (productId != null ? productId.hashCode() : 0);
+        return result;
     }
 }

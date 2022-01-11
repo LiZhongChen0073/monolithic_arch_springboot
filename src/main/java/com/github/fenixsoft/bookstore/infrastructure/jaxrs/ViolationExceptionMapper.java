@@ -43,6 +43,6 @@ public class ViolationExceptionMapper implements ExceptionMapper<ConstraintViola
     public Response toResponse(ConstraintViolationException exception) {
         log.warn("客户端传入了校验结果为非法的数据", exception);
         String msg = exception.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("；"));
-        return CommonResponse.send(Response.Status.BAD_REQUEST, msg);
+        return AbstractCommonResponse.send(Response.Status.BAD_REQUEST, msg);
     }
 }

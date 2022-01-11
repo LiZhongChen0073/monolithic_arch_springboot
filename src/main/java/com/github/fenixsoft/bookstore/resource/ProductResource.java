@@ -22,7 +22,7 @@ import com.github.fenixsoft.bookstore.applicaiton.ProductApplicationService;
 import com.github.fenixsoft.bookstore.domain.auth.Role;
 import com.github.fenixsoft.bookstore.domain.payment.Stockpile;
 import com.github.fenixsoft.bookstore.domain.warehouse.Product;
-import com.github.fenixsoft.bookstore.infrastructure.jaxrs.CommonResponse;
+import com.github.fenixsoft.bookstore.infrastructure.jaxrs.AbstractCommonResponse;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -81,7 +81,7 @@ public class ProductResource {
     })
     @RolesAllowed(Role.ADMIN)
     public Response updateProduct(@Valid Product product) {
-        return CommonResponse.op(() -> service.saveProduct(product));
+        return AbstractCommonResponse.op(() -> service.saveProduct(product));
     }
 
     /**
@@ -108,7 +108,7 @@ public class ProductResource {
     })
     @RolesAllowed(Role.ADMIN)
     public Response removeProduct(@PathParam("id") Integer id) {
-        return CommonResponse.op(() -> service.removeProduct(id));
+        return AbstractCommonResponse.op(() -> service.removeProduct(id));
     }
 
     /**
@@ -118,7 +118,7 @@ public class ProductResource {
     @Path("/stockpile/{productId}")
     @RolesAllowed(Role.ADMIN)
     public Response updateStockpile(@PathParam("productId") Integer productId, @QueryParam("amount") Integer amount) {
-        return CommonResponse.op(() -> service.setStockpileAmountByProductId(productId, amount));
+        return AbstractCommonResponse.op(() -> service.setStockpileAmountByProductId(productId, amount));
     }
 
     /**

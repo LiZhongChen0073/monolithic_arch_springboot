@@ -18,7 +18,7 @@
 
 package com.github.fenixsoft.bookstore.domain.auth.provider;
 
-import com.github.fenixsoft.bookstore.domain.auth.service.AuthenticAccountDetailsService;
+import com.github.fenixsoft.bookstore.domain.auth.service.AuthenticAccountDetailsServiceImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -43,7 +43,7 @@ import javax.inject.Named;
 public class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
     @Inject
-    private AuthenticAccountDetailsService authenticAccountDetailsService;
+    private AuthenticAccountDetailsServiceImpl authenticAccountDetailsService;
 
     @Inject
     private PasswordEncoder passwordEncoder;
@@ -62,7 +62,9 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         // AuthenticationException的子类定义了多种认证失败的类型，这里仅处“理用户不存在”、“密码不正确”两种
         // 用户不存在的话会直接由loadUserByUsername()抛出异常
         UserDetails user = authenticAccountDetailsService.loadUserByUsername(username);
-        if (!passwordEncoder.matches(password, user.getPassword())) throw new BadCredentialsException("密码不正确");
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BadCredentialsException("密码不正确");
+        }
         // 认证通过，返回令牌
         return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
 
